@@ -4,6 +4,11 @@
   <strong>Name:</strong>
   <%= @genre.name %>
 </p>
-
+<div class="genres_show_movies">
+  <% @movies.each do |movie| %>
+    <%= image_tag movie.poster.url %>
+    <%= link_to movie.name, movie_path(movie) %>
+  <% end %>
+</div>
 <%= link_to 'Edit', edit_genre_path(@genre) %> |
 <%= link_to 'Back', genres_path %>
