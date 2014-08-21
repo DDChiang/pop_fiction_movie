@@ -27,6 +27,21 @@
     <%= f.label :full_script %><br>
     <%= f.text_area :full_script %>
   </div>
+ <% if(@genres != nil) %>
+  <div class="movies_choose_genre">
+    <% @movie_genres = @movie.genres %>
+    <% @genres.each do |g| %>
+      <div class="movies_choose_genre_div">
+        <label><%= g.name %></label>
+        <% if !!@movie_genres.detect {|m_genre| m_genre[:name] == g.name } %>
+         <%= check_box_tag g.name, g.name, :checked => true %>
+        <% else %>
+         <%= check_box_tag g.name, g.name %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+ <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

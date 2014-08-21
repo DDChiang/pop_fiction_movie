@@ -15,10 +15,12 @@ class MoviesController < ApplicationController
   # GET /movies/new
   def new
     @movie = Movie.new
+    @genres = Genre.all
   end
 
   # GET /movies/1/edit
   def edit
+    @genres = Genre.all
   end
 
   # POST /movies
@@ -27,6 +29,12 @@ class MoviesController < ApplicationController
     @movie = Movie.new(movie_params)
 
     respond_to do |format|
+      @genres = Genre.all
+      @genres.each do |g|
+       if (params[g.name] != nil)
+         @movie.genres << g
+       end
+      end
       if @movie.save
         format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
         format.json { render :show, status: :created, location: @movie }
@@ -40,8 +48,15 @@ class MoviesController < ApplicationController
   # PATCH/PUT /movies/1
   # PATCH/PUT /movies/1.json
   def update
+    @genres = Genre.all
     respond_to do |format|
       if @movie.update(movie_params)
+        @movie.genres.destroy_all
+        @genres.each do |g|
+          if (params[g.name] != nil)
+            @movie.genres.push(Genre.where('name' => g.name))
+          end
+        end
         format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
         format.json { render :show, status: :ok, location: @movie }
       else
