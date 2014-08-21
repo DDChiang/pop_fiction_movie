@@ -18,13 +18,23 @@ module SessionsHelper
   def current_user?(user)
     current_user == user
   end
-
+  def signed_in_user 
+   if !signed_in?
+    flash[:error] = "You have to sign in for that. Join us!"
+    redirect_to root_url
+   end
+  end
   def signed_in?
     !current_user.nil?
   end
-
+  def admin_user
+    if current_user == nil
+     return false
+    end
+    current_user.admin
+  end
   def sign_out
-     current_user.update_attributes(User.digest(User.new_remember_token), as: :remember_token)
+     current_user.update_attributes(:remember_token => User.digest(User.new_remember_token))
      cookies.delete(:remember_token)
      self.current_user = nil
   end

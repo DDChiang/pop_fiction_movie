@@ -1,5 +1,5 @@
 class GenresController < ApplicationController
-  before_action :set_genre, only: [:show, :edit, :update, :destroy]
+  before_action :genre_admin_user, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /genres
   # GET /genres.json
@@ -10,6 +10,7 @@ class GenresController < ApplicationController
   # GET /genres/1
   # GET /genres/1.json
   def show
+    @genre = Genre.find(params[:id])
     @movies = Movie.all
   end
 
@@ -20,6 +21,7 @@ class GenresController < ApplicationController
 
   # GET /genres/1/edit
   def edit
+    @genre = Genre.find(params[:id])
   end
 
   # POST /genres
@@ -67,7 +69,12 @@ class GenresController < ApplicationController
     def set_genre
       @genre = Genre.find(params[:id])
     end
-
+    def genre_admin_user
+       if !admin_user
+         redirect_to genres_path
+         flash[:error] = "Nope."
+       end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def genre_params
       params.require(:genre).permit(:name)

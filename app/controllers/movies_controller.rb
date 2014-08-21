@@ -1,6 +1,8 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
-
+  before_action :signed_in_user, only: [:new, :create]
+  before_action :is_author, only: [:edit, :update, :destroy]
+  before_action :admin_user, only: [:destroy]
   # GET /movies
   # GET /movies.json
   def index
@@ -81,7 +83,11 @@ class MoviesController < ApplicationController
     def set_movie
       @movie = Movie.find(params[:id])
     end
-
+    def is_author
+      if !(current_user?(@movie.user))
+        redirect_to movies_path, notice: "Not your movie!"
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
       params.require(:movie).permit(:name, :preview, :full_script, :poster)

@@ -3,4 +3,5 @@
 <%= render 'form' %>
 
 <%= link_to 'Show', @genre %> |
+<%= link_to 'Delete', @genre, method: "delete", data: { confirm: "Are you sure?" } %> |
 <%= link_to 'Back', genres_path %>

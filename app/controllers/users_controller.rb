@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+#  before_action :set_user, only: [:show, :index]
+  before_action :not_signed_in, only: [:new, :create]
+  before_action :signed_in_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :admin_user, only: :destroy
   # GET /users
   # GET /users.json
   def index
@@ -71,8 +74,22 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find(params[:id])
     end
-
+    def not_signed_in
+      if signed_in?
+	flash[:error] = 'Don\'t even try...'
+        redirect_to current_user
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
+    def correct_user
+      @user = User.find(params[:id]) #get from controller
+      if !(current_user?(@user) || admin_user)
+          flash[:error] = 'Insufficient permission'
+          redirect_to(root_url)
+      end
+    end
+
+
     def user_params
       params.require(:user).permit(:first_name, :last_name, :password, :email, :nickname, :description, :photo)
     end

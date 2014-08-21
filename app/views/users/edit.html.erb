@@ -1,5 +1,8 @@
 <h1>Editing user</h1>
 
 <%= render 'form' %>
+<% if !(@user.admin?) %>
+  <%= link_to 'Delete', user, method: "delete" %>
+<% end %>
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>
