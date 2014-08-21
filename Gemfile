@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'paperclip', '~>4.1'
-
+gem 'bcrypt', '~>3.1.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use postgresql as the database for Active Record

@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_attached_file :photo
   validates :email, presence: true
- 
+  has_secure_password 
   #TODO go through these
   validates_attachment_content_type :photo, :content_type => /\Aimage/
   # Validate filename
