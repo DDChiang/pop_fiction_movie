@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
   has_attached_file :photo
+
+  has_many :votes, :foreign_key => :voter_id
+  has_many :voted_movies, :through => :votes, :source => :voted_movie
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: {minimum: 6}

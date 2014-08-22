@@ -1,17 +1,23 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @genre.name %>
-</p>
+<strong>Genre:</strong>
+<%= @genre.name %>
 <div class="genres_show_movies">
   <% @movies.each do |movie| %>
-    <%= image_tag movie.poster.url %>
-    <%= link_to movie.name, movie_path(movie) %>
+    <div class="index_movie_box">
+	  <div class="index_movie_poster">
+        <%= image_tag movie.poster.url %>
+	  </div>
+	  <br>
+      <%= link_to movie.name, movie_path(movie) %>
+       <br>
+       Votes: <%= movie.voters.count %>
+    </div>
   <% end %>
 </div>
 
+<div class="show_genre_links">
 <% if admin_user %>
 <%= link_to 'Edit', edit_genre_path(@genre) %> |
 <%= link_to 'Back', genres_path %>
 <% end %>
+</div>

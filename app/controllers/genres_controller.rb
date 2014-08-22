@@ -4,14 +4,16 @@ class GenresController < ApplicationController
   # GET /genres
   # GET /genres.json
   def index
-    @genres = Genre.all
+    @g = Genre.all
+    @genres = @g.sort_by { |h| h.name }
   end
 
   # GET /genres/1
   # GET /genres/1.json
+  #NOW using /genres/horror  <--- params[:name]
   def show
     @genre = Genre.find(params[:id])
-    @movies = Movie.all
+    @movies = @genre.movies
   end
 
   # GET /genres/new
@@ -31,7 +33,7 @@ class GenresController < ApplicationController
 
     respond_to do |format|
       if @genre.save
-        format.html { redirect_to @genre, notice: 'Genre was successfully created.' }
+        format.html { redirect_to genres_path, notice: 'Genre was successfully created.' }
         format.json { render :show, status: :created, location: @genre }
       else
         format.html { render :new }
@@ -57,6 +59,7 @@ class GenresController < ApplicationController
   # DELETE /genres/1
   # DELETE /genres/1.json
   def destroy
+    @genre = Genre.find(params[:id])
     @genre.destroy
     respond_to do |format|
       format.html { redirect_to genres_url, notice: 'Genre was successfully destroyed.' }

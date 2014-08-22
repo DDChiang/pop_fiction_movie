@@ -27,6 +27,9 @@
   <%= @user.description %>
 </p>
 
+Seconds <%= @user.voted_movies.count %> movies
+<br>
+<br>
 <% if current_user?(@user) %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <% end %>

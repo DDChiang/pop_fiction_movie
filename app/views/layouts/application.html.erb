@@ -2,23 +2,85 @@
 <html>
 <head>
   <title>Popfiction</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application'%>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if signed_in? %>
-  <%= link_to "Sign out" , signout_path, method: "delete" %>
-<% else %>
-  <%= link_to "Sign in", signin_path, method: "get" %>
-  <%= link_to "Join us!", signup_path, method: "get" %>
-<% end %>
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
+<div id="navbar-wrapper">
+  <div id="navbar-head">
+    <div id="head-logo-box">
+      <div id="head-logo">
+        <img src="/assets/smiley-sh.png"/>
+      </div>
+    </div>
+    <div id="head-title">
+      <div id="head-title-text">Moving Fiction</span></div>
+    </div>
+  </div>
+  <div id="sign-in">
+    <% if signed_in? %>
+      <%= link_to "Sign out" , signout_path, method: "delete" %>
+    <% else %>
+      <%= link_to "Sign in", signin_path, method: "get" %>
+      <%= link_to "Join us!", signup_path, method: "get" %>
+    <% end %>
+  </div>
+  <div id="navbar">
+    <ul id="header-ul">
+      <li id="header-li"><a href="">Home</a></li>
+      <li id="header-li"><a href="">Trending</a>
+        <ul>
+          <li><a href="">New</a></li>
+          <li><a href="">Fan Faves</a></li>
+        </ul>
+      </li> <!-- end Trending-->
+      <li id="header-li"><a href="">Genres</a>
+        <ul>
+          <li><a href="">Horror</a></li>
+          <li><a href="">Alien</a></li>
+          <li><a href="">Gore</a></li>
+          <li><a href="">Serial Killer</a></li>
+          <li><a href="">Psychological</a></li>
+          <li><a href="">Documentary</a></li>
+          <li><a href="">Other</a></li>
+        </ul>
+      </li> <!-- end Genres -->
+      <li id="header-li"><a href="">Community</a></li>
+      <li id="header-li"><a href="">FAQS</a></li>
+    </ul>
+  </div>
+  <a href="#" id="menu-button"><img src="/assets/menu-bar.png"></a>
+</div>
 
 
-<%= yield %>
-
+<div id="content-wrapper">
+  <div id="sidebar">
+     <ul>
+        <li id="li-title">Featured</li>
+        <li><a href="">New</a></li>
+        <li><a href="">Fan Faves</a></li>
+     </ul>
+     <ul>
+       <li id="li-title">Genres</li>
+       <li><a href="">Horror</a></li>
+       <li><a href="">Alien</a></li>
+       <li><a href="">Gore</a></li>
+       <li><a href="">Serial Killer</a></li>
+       <li><a href="">Psychological</a></li>
+       <li><a href="">Documentary</a></li>
+       <li><a href="">Other</a></li>
+     </ul>
+  </div>
+  <div class="real-content">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    <%= yield %>
+  </div>
+</div>
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" %>
 </body>
 </html>
