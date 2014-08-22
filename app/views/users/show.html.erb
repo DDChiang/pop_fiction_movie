@@ -27,7 +27,7 @@
   <%= @user.description %>
 </p>
 
-Seconds <%= @user.voted_movies.count %> movies
+Seconds <span id="voted_movies"><%= @user.voted_movies.count %></span> movies
 <br>
 <br>
 <% if current_user?(@user) %>

@@ -1,5 +1,10 @@
-<h1>Movies</h1>
-
+<span id="movies_index_title">Movies</span>
+<% if signed_in? %>
+<div class="movies_new_link">
+<%= link_to 'New Movie', new_movie_path %>
+</div>
+<% end %>
+<br>
 <% @movies.each do |movie| %>
   <div class="index_movie_box">
     <div class="index_movie_poster">
@@ -14,7 +19,7 @@
     Votes: <%= movie.voters.count %>
     <div class="index_movie_update_links">
       <% if movie.user == current_user && current_user != nil %>
-        <%= link_to 'Edit', edit_movie_path(movie) %>
+        <%= link_to 'Edit', edit_movie_path(movie) %>  
       <% end %>
       <% if movie.user == current_user && current_user != nil || admin_user %>
         <%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -25,6 +30,3 @@
 
 <br>
 
-<% if signed_in? %>
-<%= link_to 'New Movie', new_movie_path %>
-<% end %>

@@ -17,7 +17,7 @@
       </div>
     </div>
     <div id="head-title">
-      <div id="head-title-text">Moving Fiction</span></div>
+      <div id="head-title-text"><%= link_to 'Moving Fiction', root_url %></div>
     </div>
   </div>
   <div id="sign-in">
@@ -30,22 +30,22 @@
   </div>
   <div id="navbar">
     <ul id="header-ul">
-      <li id="header-li"><a href="">Home</a></li>
+      <li id="header-li"><%= link_to 'Home', root_url %></li>
       <li id="header-li"><a href="">Trending</a>
         <ul>
           <li><a href="">New</a></li>
           <li><a href="">Fan Faves</a></li>
         </ul>
       </li> <!-- end Trending-->
-      <li id="header-li"><a href="">Genres</a>
+      <li id="header-li"><%= link_to 'Genres', genres_path %>
         <ul>
-          <li><a href="">Horror</a></li>
-          <li><a href="">Alien</a></li>
-          <li><a href="">Gore</a></li>
-          <li><a href="">Serial Killer</a></li>
-          <li><a href="">Psychological</a></li>
-          <li><a href="">Documentary</a></li>
-          <li><a href="">Other</a></li>
+          <li><a href="/genres/1">Horror</a></li>
+          <li><a href="/genres/6">Alien</a></li>
+          <li><a href="/genres/12">Gore</a></li>
+          <li><a href="/genres/13">Serial Killer</a></li>
+          <li><a href="/genres/2">Psychological</a></li>
+          <li><a href="/genres/8">Documentary</a></li>
+          <li><a href="/genres/7">Other</a></li>
         </ul>
       </li> <!-- end Genres -->
       <li id="header-li"><a href="">Community</a></li>
